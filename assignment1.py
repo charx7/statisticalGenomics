@@ -1,4 +1,5 @@
 import numpy as np
+from topologicalOrder import topologicalOrder
 
 def edgeAdditionsValidity(incidence, ancestor, iMatrix, ones):
     # check for the validity of edge addition operations
@@ -40,17 +41,24 @@ def main():
 
     # Check for the validity of edge additions
     addValid = edgeAdditionsValidity(incidence, ancestor, iMatrix, ones)
+    print('=======================>')
     print('The valid edge additions operations matrix are: \n' , addValid)
 
     # Check for the validity of edge reversals
     reversalValid = edgeReversalValidity(incidence, ancestor)
+    print('=======================>')
     print('The valid edge reversal operations matrix is: \n', reversalValid)
 
     # Now we calculate the total number of neighbour graphs
     validSumMatrix = addValid + reversalValid + incidence
     neighGraphs = np.sum(validSumMatrix)
+    print('=======================>')
     print('We can reach a total of: ',neighGraphs, ' neigh graphs.')
 
-
+    # Now we do the topological order of the graph
+    print('=======================>')
+    print('The topological order or the graph is:')
+    print(topologicalOrder(incidence))
+    
 if __name__ == '__main__':
     main()

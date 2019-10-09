@@ -1,1 +1,1 @@
-asdf
+print('Hello World!')

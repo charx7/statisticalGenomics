@@ -5,7 +5,7 @@ run:
 build:
 	docker build -t rstudio .   
 clean:
-	docker rmi $(docker images -f "dangling=true" -q)
+	docker images -f dangling=true
 help:
 	@echo start - Will start the docker container
 	@echo build - Will build the docker image

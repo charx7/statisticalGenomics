@@ -1,3 +1,4 @@
+require(svMisc)
 
 strMCMC <- function(Data,incidence,iterations,step_save, fan.in=nrow(Data)-1, v=1, mu=numeric(nrow(Data)), a=nrow(Data)+2, T_0=diag(0.5,nrow(Data),nrow(Data))){
   n <- nrow(Data)                                # number of nodes
@@ -419,7 +420,7 @@ strMCMC <- function(Data,incidence,iterations,step_save, fan.in=nrow(Data)-1, v=
         re <- re.new
       }
     }
-    
+    progress(z)
     L1[[z]] <- incidence
     L2[[z]] <- bge_old
   }

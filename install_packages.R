@@ -1,5 +1,5 @@
-install.packages("devtools")
-
+install.packages("devtools") # for installing stuff
+install.packages("svMisc") # Progress bar
 # Commands to install the LIMMA package
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")

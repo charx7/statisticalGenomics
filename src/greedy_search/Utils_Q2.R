@@ -57,7 +57,7 @@ SingleEdgeOperationList <- function(Incidence){
   return(SingleEdgeOperation)
 }
 
-NeighborgraphsList <- function(Incidence){
+NeighborgraphsList <- function(Incidence, data){
   NeighborList <- list("Incidence" = list(), "Ancestor" = list(), "BGe" = NULL)
   X <- SingleEdgeOperationList(Incidence)
       for (k in 1:length(X)){

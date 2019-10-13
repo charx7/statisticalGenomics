@@ -420,7 +420,7 @@ strMCMC <- function(Data,incidence,iterations,step_save, fan.in=nrow(Data)-1, v=
         re <- re.new
       }
     }
-    progress(z)
+    progress(z *100 /((iterations/step_save)+1))
     L1[[z]] <- incidence
     L2[[z]] <- bge_old
   }

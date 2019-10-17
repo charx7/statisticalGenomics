@@ -1,3 +1,6 @@
+rm(list=ls()) # clean R environment
+cat("\f") # clear the console
+
 source('./assignment3.R') # source pre-processing script
 
 # Exercise 1 

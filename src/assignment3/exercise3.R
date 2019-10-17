@@ -1,7 +1,12 @@
+rm(list=ls()) # clean R environment
+cat("\f") # clear the console
+
 # Exercise 3
 source('./assignment3.R')
 
 AUROC.vector = vector() # empty auroc scores list
+max.scores.matrices = list() # empty list of max scores matrices from the mcmc
+mcmc.max.scores.vector = vector() # empty max scores vector
 # Run MCMC for the 15 datasets
 for (idx in 1:15) {
   progress(idx)
@@ -14,6 +19,13 @@ for (idx in 1:15) {
   # Run the MCMC algo
   Sim = strMCMC(curr_data, start_incidence, iterations, step_save)
   n   = length(Sim[[1]]) # Get length of the chain
+  SCORES_vector = unlist(Sim[[2]]) # get the vector of the graph scores
+  # Doubt should we extract the max out of the bge score or the AUC?
+  SIM_max_score_idx = which.max(SCORES_vector) # get the idx where the max it
+  SIM_max_score_matrix = Sim[[1]][[SIM_max_score_idx]] # get the highest scoring matrix
+  max.scores.matrices[[idx]] = SIM_max_score_matrix # append to the list
+  mcmc.max.scores.vector[idx] = SCORES_vector[SIM_max_score_idx] # save the max score vector
+  # End doubt
   SCORES_undirected = matrix(0,11,11) # declare an empty edge score matrix
   for (i in 1:n){
     # Sum the number of apperances on each score
@@ -26,11 +38,13 @@ for (idx in 1:15) {
   AUROC = compute_AUROC(SCORES_undirected,true_Net) # calculate the AUC
   AUROC.vector = c(AUROC.vector, AUROC) # append the current AUROC
 }
+
+# Printerino
 # means computations
-cat('The mean of the AUROC of m=20 is: ', mean(AUROC.vector[1:5]))
-cat('The mean of the AUROC of m=50 is: ', mean(AUROC.vector[6:10]))
-cat('The mean of the AUROC of m=100 is: ', mean(AUROC.vector[11:15]))
+cat('The mean of the AUROC of m=20 is: ', mean(AUROC.vector[1:5]), '\n')
+cat('The mean of the AUROC of m=50 is: ', mean(AUROC.vector[6:10]), '\n')
+cat('The mean of the AUROC of m=100 is: ', mean(AUROC.vector[11:15]), '\n')
 # std computations
-cat('The std of the AUROC of m=20 is: ', sqrt(var(AUROC.vector[1:5])))
-cat('The std of the AUROC of m=50 is: ', sqrt(var(AUROC.vector[6:10])))
-cat('The std of the AUROC of m=100 is: ', sqrt(var(AUROC.vector[11:15])))
+cat('The std of the AUROC of m=20 is: ', sqrt(var(AUROC.vector[1:5])), '\n')
+cat('The std of the AUROC of m=50 is: ', sqrt(var(AUROC.vector[6:10])), '\n')
+cat('The std of the AUROC of m=100 is: ', sqrt(var(AUROC.vector[11:15])), '\n')

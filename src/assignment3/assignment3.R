@@ -1,5 +1,6 @@
 source('./utils.R')
 source('./MCMC.R')
+set.seed(43) # set seed to the answer of life
 
 #  Data Params
 m_obs     = c(20, 50, 100) # numb of observations

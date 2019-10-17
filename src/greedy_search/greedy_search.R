@@ -13,7 +13,7 @@ greedy_search = function(data) {
   numIter = 100
   bestGraph = Inc # append the first 'arbitrary graph' to the results vector
   bestScore = 0
-  maxIter = 2
+  maxIter = 10
   
   # >> Main training loop
   for(idx in 1:maxIter) {
